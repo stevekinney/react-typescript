@@ -1,7 +1,6 @@
 ## Introduction
 
 * [Introduction](Introduction.md)
-* [Why Use TypeScript? A Brief Sales Pitch](Why%20Use%20TypeScript?%20A%20Brief%20Sales%20Pitch.md)
 
 ## Fundamentals
 
@@ -25,7 +24,7 @@
 * [Setting state without a default value](Setting%20state%20without%20a%20default%20value.md)
 * [State and events, an exercise](State%20and%20events,%20an%20exercise.md)
 * [State and events, a solution](State%20and%20events,%20a%20solution.md)
-* Now with Filtering
+* [Passing setState and reusing events](Passing%20setState%20and%20reusing%20events.md)
 * [With Filtering, a solution](With%20Filtering,%20a%20solution.md)
 
 ## Working with Reducers
@@ -39,11 +38,15 @@
 
 * [The Context API](The%20Context%20API.md)
 * [Using state management and the Context API](Using%20state%20management%20and%20the%20Context%20API.md)
+* [The Context API, an exercise](The%20Context%20API,%20an%20exercise.md)
+* [Context API, a solution](Context%20API,%20a%20solution.md)
 
 ## Just Enough TypeScript
 
 * [Generics](Generics.md)
 * [Utility types](Utility%20types.md), a tour
+* [Deriving a partial type for updating, a problem statement](Deriving%20a%20partial%20type%20for%20updating,%20a%20problem%20statement.md)
+* [Deriving a partial type for updating, a solution](Deriving%20a%20partial%20type%20for%20updating,%20a%20solution.md)
 * [Type template literals](Type%20template%20literals.md)
 * [Better typing for number inputs using template literals](Better%20typing%20for%20number%20inputs%20using%20template%20literals.md)
 

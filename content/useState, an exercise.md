@@ -11,7 +11,7 @@ Your mission—if you choose to accept it—is to update our Accident Counter an
 
 Here's what you're going to need to do.
 
-* Add an additional `useState` hook that storesn the value in the input field.
+* Add an additional `useState` hook that stores the value in the input field.
 * On submit, update the value.
 
 You can view the solution [here](useState,%20a%20solution.md).

@@ -2,3 +2,4 @@
 
 rm content/*
 obsidian-export /Users/stevekinney/Library/Mobile\ Documents/iCloud\~md\~obsidian/Documents/React\ and\ TypeScript content
+mv content/_attachments/* public/_attachments
