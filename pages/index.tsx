@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next';
+import Head from 'next/head';
 import ContentLayout from '../components/content-layout';
 import Markdown from '../components/markdown';
 import { getDocumentBySlug } from '../lib/documents';
@@ -6,6 +7,10 @@ import { getDocumentBySlug } from '../lib/documents';
 export default ({ content }: MarkdownDocument) => {
   return (
     <ContentLayout>
+      <Head>
+        <title>React && TypeScript — Frontend Masters</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <header>
         <h1>Overview</h1>
       </header>
