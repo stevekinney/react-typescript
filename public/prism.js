@@ -1,5 +1,3 @@
-/* PrismJS 1.29.0
-https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+clike+javascript+diff+javadoclike+jsdoc+json+jsx+tsx+typescript&plugins=toolbar+copy-to-clipboard+diff-highlight */
 var _self =
     'undefined' != typeof window
       ? window
@@ -547,6 +545,65 @@ var _self =
   (Prism.languages.ssml = Prism.languages.xml),
   (Prism.languages.atom = Prism.languages.xml),
   (Prism.languages.rss = Prism.languages.xml);
+!(function (s) {
+  var e =
+    /(?:"(?:\\(?:\r\n|[\s\S])|[^"\\\r\n])*"|'(?:\\(?:\r\n|[\s\S])|[^'\\\r\n])*')/;
+  (s.languages.css = {
+    comment: /\/\*[\s\S]*?\*\//,
+    atrule: {
+      pattern: RegExp(
+        '@[\\w-](?:[^;{\\s"\']|\\s+(?!\\s)|' +
+          e.source +
+          ')*?(?:;|(?=\\s*\\{))',
+      ),
+      inside: {
+        rule: /^@[\w-]+/,
+        'selector-function-argument': {
+          pattern:
+            /(\bselector\s*\(\s*(?![\s)]))(?:[^()\s]|\s+(?![\s)])|\((?:[^()]|\([^()]*\))*\))+(?=\s*\))/,
+          lookbehind: !0,
+          alias: 'selector',
+        },
+        keyword: {
+          pattern: /(^|[^\w-])(?:and|not|only|or)(?![\w-])/,
+          lookbehind: !0,
+        },
+      },
+    },
+    url: {
+      pattern: RegExp(
+        '\\burl\\((?:' + e.source + '|(?:[^\\\\\r\n()"\']|\\\\[^])*)\\)',
+        'i',
+      ),
+      greedy: !0,
+      inside: {
+        function: /^url/i,
+        punctuation: /^\(|\)$/,
+        string: { pattern: RegExp('^' + e.source + '$'), alias: 'url' },
+      },
+    },
+    selector: {
+      pattern: RegExp(
+        '(^|[{}\\s])[^{}\\s](?:[^{};"\'\\s]|\\s+(?![\\s{])|' +
+          e.source +
+          ')*(?=\\s*\\{)',
+      ),
+      lookbehind: !0,
+    },
+    string: { pattern: e, greedy: !0 },
+    property: {
+      pattern:
+        /(^|[^-\w\xA0-\uFFFF])(?!\s)[-_a-z\xA0-\uFFFF](?:(?!\s)[-\w\xA0-\uFFFF])*(?=\s*:)/i,
+      lookbehind: !0,
+    },
+    important: /!important\b/i,
+    function: { pattern: /(^|[^-a-z0-9])[-a-z0-9]+(?=\()/i, lookbehind: !0 },
+    punctuation: /[(){};:,]/,
+  }),
+    (s.languages.css.atrule.inside.rest = s.languages.css);
+  var t = s.languages.markup;
+  t && (t.tag.addInlined('style', 'css'), t.tag.addAttribute('style', 'css'));
+})(Prism);
 Prism.languages.clike = {
   comment: [
     { pattern: /(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/, lookbehind: !0, greedy: !0 },
@@ -725,186 +782,6 @@ Prism.languages.clike = {
   }),
     Object.defineProperty(e.languages.diff, 'PREFIXES', { value: n });
 })(Prism);
-!(function (a) {
-  var e = (a.languages.javadoclike = {
-    parameter: {
-      pattern: /(^[\t ]*(?:\/{3}|\*|\/\*\*)\s*@(?:arg|arguments|param)\s+)\w+/m,
-      lookbehind: !0,
-    },
-    keyword: {
-      pattern: /(^[\t ]*(?:\/{3}|\*|\/\*\*)\s*|\{)@[a-z][a-zA-Z-]+\b/m,
-      lookbehind: !0,
-    },
-    punctuation: /[{}]/,
-  });
-  Object.defineProperty(e, 'addSupport', {
-    value: function (e, n) {
-      'string' == typeof e && (e = [e]),
-        e.forEach(function (e) {
-          !(function (e, n) {
-            var t = 'doc-comment',
-              r = a.languages[e];
-            if (r) {
-              var o = r[t];
-              if (
-                (o ||
-                  (o = (r = a.languages.insertBefore(e, 'comment', {
-                    'doc-comment': {
-                      pattern: /(^|[^\\])\/\*\*[^/][\s\S]*?(?:\*\/|$)/,
-                      lookbehind: !0,
-                      alias: 'comment',
-                    },
-                  }))[t]),
-                o instanceof RegExp && (o = r[t] = { pattern: o }),
-                Array.isArray(o))
-              )
-                for (var i = 0, s = o.length; i < s; i++)
-                  o[i] instanceof RegExp && (o[i] = { pattern: o[i] }), n(o[i]);
-              else n(o);
-            }
-          })(e, function (a) {
-            a.inside || (a.inside = {}), (a.inside.rest = n);
-          });
-        });
-    },
-  }),
-    e.addSupport(['java', 'javascript', 'php'], e);
-})(Prism);
-!(function (e) {
-  (e.languages.typescript = e.languages.extend('javascript', {
-    'class-name': {
-      pattern:
-        /(\b(?:class|extends|implements|instanceof|interface|new|type)\s+)(?!keyof\b)(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?:\s*<(?:[^<>]|<(?:[^<>]|<[^<>]*>)*>)*>)?/,
-      lookbehind: !0,
-      greedy: !0,
-      inside: null,
-    },
-    builtin:
-      /\b(?:Array|Function|Promise|any|boolean|console|never|number|string|symbol|unknown)\b/,
-  })),
-    e.languages.typescript.keyword.push(
-      /\b(?:abstract|declare|is|keyof|readonly|require)\b/,
-      /\b(?:asserts|infer|interface|module|namespace|type)\b(?=\s*(?:[{_$a-zA-Z\xA0-\uFFFF]|$))/,
-      /\btype\b(?=\s*(?:[\{*]|$))/,
-    ),
-    delete e.languages.typescript.parameter,
-    delete e.languages.typescript['literal-property'];
-  var s = e.languages.extend('typescript', {});
-  delete s['class-name'],
-    (e.languages.typescript['class-name'].inside = s),
-    e.languages.insertBefore('typescript', 'function', {
-      decorator: {
-        pattern: /@[$\w\xA0-\uFFFF]+/,
-        inside: {
-          at: { pattern: /^@/, alias: 'operator' },
-          function: /^[\s\S]+/,
-        },
-      },
-      'generic-function': {
-        pattern:
-          /#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*\s*<(?:[^<>]|<(?:[^<>]|<[^<>]*>)*>)*>(?=\s*\()/,
-        greedy: !0,
-        inside: {
-          function: /^#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*/,
-          generic: { pattern: /<[\s\S]+/, alias: 'class-name', inside: s },
-        },
-      },
-    }),
-    (e.languages.ts = e.languages.typescript);
-})(Prism);
-!(function (e) {
-  var a = e.languages.javascript,
-    n = '\\{(?:[^{}]|\\{(?:[^{}]|\\{[^{}]*\\})*\\})+\\}',
-    t = '(@(?:arg|argument|param|property)\\s+(?:' + n + '\\s+)?)';
-  (e.languages.jsdoc = e.languages.extend('javadoclike', {
-    parameter: {
-      pattern: RegExp(t + '(?:(?!\\s)[$\\w\\xA0-\\uFFFF.])+(?=\\s|$)'),
-      lookbehind: !0,
-      inside: { punctuation: /\./ },
-    },
-  })),
-    e.languages.insertBefore('jsdoc', 'keyword', {
-      'optional-parameter': {
-        pattern: RegExp(
-          t + '\\[(?:(?!\\s)[$\\w\\xA0-\\uFFFF.])+(?:=[^[\\]]+)?\\](?=\\s|$)',
-        ),
-        lookbehind: !0,
-        inside: {
-          parameter: {
-            pattern: /(^\[)[$\w\xA0-\uFFFF\.]+/,
-            lookbehind: !0,
-            inside: { punctuation: /\./ },
-          },
-          code: {
-            pattern: /(=)[\s\S]*(?=\]$)/,
-            lookbehind: !0,
-            inside: a,
-            alias: 'language-javascript',
-          },
-          punctuation: /[=[\]]/,
-        },
-      },
-      'class-name': [
-        {
-          pattern: RegExp(
-            '(@(?:augments|class|extends|interface|memberof!?|template|this|typedef)\\s+(?:<TYPE>\\s+)?)[A-Z]\\w*(?:\\.[A-Z]\\w*)*'.replace(
-              /<TYPE>/g,
-              function () {
-                return n;
-              },
-            ),
-          ),
-          lookbehind: !0,
-          inside: { punctuation: /\./ },
-        },
-        {
-          pattern: RegExp('(@[a-z]+\\s+)' + n),
-          lookbehind: !0,
-          inside: {
-            string: a.string,
-            number: a.number,
-            boolean: a.boolean,
-            keyword: e.languages.typescript.keyword,
-            operator: /=>|\.\.\.|[&|?:*]/,
-            punctuation: /[.,;=<>{}()[\]]/,
-          },
-        },
-      ],
-      example: {
-        pattern:
-          /(@example\s+(?!\s))(?:[^@\s]|\s+(?!\s))+?(?=\s*(?:\*\s*)?(?:@\w|\*\/))/,
-        lookbehind: !0,
-        inside: {
-          code: {
-            pattern: /^([\t ]*(?:\*\s*)?)\S.*$/m,
-            lookbehind: !0,
-            inside: a,
-            alias: 'language-javascript',
-          },
-        },
-      },
-    }),
-    e.languages.javadoclike.addSupport('javascript', e.languages.jsdoc);
-})(Prism);
-(Prism.languages.json = {
-  property: {
-    pattern: /(^|[^\\])"(?:\\.|[^\\"\r\n])*"(?=\s*:)/,
-    lookbehind: !0,
-    greedy: !0,
-  },
-  string: {
-    pattern: /(^|[^\\])"(?:\\.|[^\\"\r\n])*"(?!\s*:)/,
-    lookbehind: !0,
-    greedy: !0,
-  },
-  comment: { pattern: /\/\/.*|\/\*[\s\S]*?(?:\*\/|$)/, greedy: !0 },
-  number: /-?\b\d+(?:\.\d+)?(?:e[+-]?\d+)?\b/i,
-  punctuation: /[{}[\],]/,
-  operator: /:/,
-  boolean: /\b(?:false|true)\b/,
-  null: { pattern: /\bnull\b/, alias: 'keyword' },
-}),
-  (Prism.languages.webmanifest = Prism.languages.json);
 !(function (t) {
   var n = t.util.clone(t.languages.javascript),
     e = '(?:\\{<S>*\\.{3}(?:[^{}]|<BRACES>)*\\})';
@@ -1009,6 +886,48 @@ Prism.languages.clike = {
   });
 })(Prism);
 !(function (e) {
+  (e.languages.typescript = e.languages.extend('javascript', {
+    'class-name': {
+      pattern:
+        /(\b(?:class|extends|implements|instanceof|interface|new|type)\s+)(?!keyof\b)(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?:\s*<(?:[^<>]|<(?:[^<>]|<[^<>]*>)*>)*>)?/,
+      lookbehind: !0,
+      greedy: !0,
+      inside: null,
+    },
+    builtin:
+      /\b(?:Array|Function|Promise|any|boolean|console|never|number|string|symbol|unknown)\b/,
+  })),
+    e.languages.typescript.keyword.push(
+      /\b(?:abstract|declare|is|keyof|readonly|require)\b/,
+      /\b(?:asserts|infer|interface|module|namespace|type)\b(?=\s*(?:[{_$a-zA-Z\xA0-\uFFFF]|$))/,
+      /\btype\b(?=\s*(?:[\{*]|$))/,
+    ),
+    delete e.languages.typescript.parameter,
+    delete e.languages.typescript['literal-property'];
+  var s = e.languages.extend('typescript', {});
+  delete s['class-name'],
+    (e.languages.typescript['class-name'].inside = s),
+    e.languages.insertBefore('typescript', 'function', {
+      decorator: {
+        pattern: /@[$\w\xA0-\uFFFF]+/,
+        inside: {
+          at: { pattern: /^@/, alias: 'operator' },
+          function: /^[\s\S]+/,
+        },
+      },
+      'generic-function': {
+        pattern:
+          /#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*\s*<(?:[^<>]|<(?:[^<>]|<[^<>]*>)*>)*>(?=\s*\()/,
+        greedy: !0,
+        inside: {
+          function: /^#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*/,
+          generic: { pattern: /<[\s\S]+/, alias: 'class-name', inside: s },
+        },
+      },
+    }),
+    (e.languages.ts = e.languages.typescript);
+})(Prism);
+!(function (e) {
   var a = e.util.clone(e.languages.typescript);
   (e.languages.tsx = e.languages.extend('jsx', a)),
     delete e.languages.tsx.parameter,
@@ -1020,197 +939,6 @@ Prism.languages.clike = {
   )),
     (t.lookbehind = !0);
 })(Prism);
-!(function () {
-  if ('undefined' != typeof Prism && 'undefined' != typeof document) {
-    var e = [],
-      t = {},
-      n = function () {};
-    Prism.plugins.toolbar = {};
-    var a = (Prism.plugins.toolbar.registerButton = function (n, a) {
-        var r;
-        (r =
-          'function' == typeof a
-            ? a
-            : function (e) {
-                var t;
-                return (
-                  'function' == typeof a.onClick
-                    ? (((t = document.createElement('button')).type = 'button'),
-                      t.addEventListener('click', function () {
-                        a.onClick.call(this, e);
-                      }))
-                    : 'string' == typeof a.url
-                    ? ((t = document.createElement('a')).href = a.url)
-                    : (t = document.createElement('span')),
-                  a.className && t.classList.add(a.className),
-                  (t.textContent = a.text),
-                  t
-                );
-              }),
-          n in t
-            ? console.warn(
-                'There is a button with the key "' +
-                  n +
-                  '" registered already.',
-              )
-            : e.push((t[n] = r));
-      }),
-      r = (Prism.plugins.toolbar.hook = function (a) {
-        var r = a.element.parentNode;
-        if (
-          r &&
-          /pre/i.test(r.nodeName) &&
-          !r.parentNode.classList.contains('code-toolbar')
-        ) {
-          var o = document.createElement('div');
-          o.classList.add('code-toolbar'),
-            r.parentNode.insertBefore(o, r),
-            o.appendChild(r);
-          var i = document.createElement('div');
-          i.classList.add('toolbar');
-          var l = e,
-            d = (function (e) {
-              for (; e; ) {
-                var t = e.getAttribute('data-toolbar-order');
-                if (null != t)
-                  return (t = t.trim()).length ? t.split(/\s*,\s*/g) : [];
-                e = e.parentElement;
-              }
-            })(a.element);
-          d &&
-            (l = d.map(function (e) {
-              return t[e] || n;
-            })),
-            l.forEach(function (e) {
-              var t = e(a);
-              if (t) {
-                var n = document.createElement('div');
-                n.classList.add('toolbar-item'),
-                  n.appendChild(t),
-                  i.appendChild(n);
-              }
-            }),
-            o.appendChild(i);
-        }
-      });
-    a('label', function (e) {
-      var t = e.element.parentNode;
-      if (t && /pre/i.test(t.nodeName) && t.hasAttribute('data-label')) {
-        var n,
-          a,
-          r = t.getAttribute('data-label');
-        try {
-          a = document.querySelector('template#' + r);
-        } catch (e) {}
-        return (
-          a
-            ? (n = a.content)
-            : (t.hasAttribute('data-url')
-                ? ((n = document.createElement('a')).href =
-                    t.getAttribute('data-url'))
-                : (n = document.createElement('span')),
-              (n.textContent = r)),
-          n
-        );
-      }
-    }),
-      Prism.hooks.add('complete', r);
-  }
-})();
-!(function () {
-  function t(t) {
-    var e = document.createElement('textarea');
-    (e.value = t.getText()),
-      (e.style.top = '0'),
-      (e.style.left = '0'),
-      (e.style.position = 'fixed'),
-      document.body.appendChild(e),
-      e.focus(),
-      e.select();
-    try {
-      var o = document.execCommand('copy');
-      setTimeout(function () {
-        o ? t.success() : t.error();
-      }, 1);
-    } catch (e) {
-      setTimeout(function () {
-        t.error(e);
-      }, 1);
-    }
-    document.body.removeChild(e);
-  }
-  'undefined' != typeof Prism &&
-    'undefined' != typeof document &&
-    (Prism.plugins.toolbar
-      ? Prism.plugins.toolbar.registerButton('copy-to-clipboard', function (e) {
-          var o = e.element,
-            n = (function (t) {
-              var e = {
-                copy: 'Copy',
-                'copy-error': 'Press Ctrl+C to copy',
-                'copy-success': 'Copied!',
-                'copy-timeout': 5e3,
-              };
-              for (var o in e) {
-                for (
-                  var n = 'data-prismjs-' + o, c = t;
-                  c && !c.hasAttribute(n);
-
-                )
-                  c = c.parentElement;
-                c && (e[o] = c.getAttribute(n));
-              }
-              return e;
-            })(o),
-            c = document.createElement('button');
-          (c.className = 'copy-to-clipboard-button'),
-            c.setAttribute('type', 'button');
-          var r = document.createElement('span');
-          return (
-            c.appendChild(r),
-            u('copy'),
-            (function (e, o) {
-              e.addEventListener('click', function () {
-                !(function (e) {
-                  navigator.clipboard
-                    ? navigator.clipboard
-                        .writeText(e.getText())
-                        .then(e.success, function () {
-                          t(e);
-                        })
-                    : t(e);
-                })(o);
-              });
-            })(c, {
-              getText: function () {
-                return o.textContent;
-              },
-              success: function () {
-                u('copy-success'), i();
-              },
-              error: function () {
-                u('copy-error'),
-                  setTimeout(function () {
-                    !(function (t) {
-                      window.getSelection().selectAllChildren(t);
-                    })(o);
-                  }, 1),
-                  i();
-              },
-            }),
-            c
-          );
-          function i() {
-            setTimeout(function () {
-              u('copy');
-            }, n['copy-timeout']);
-          }
-          function u(t) {
-            (r.textContent = n[t]), c.setAttribute('data-copy-state', t);
-          }
-        })
-      : console.warn('Copy to Clipboard plugin loaded before Toolbar plugin.'));
-})();
 !(function () {
   if ('undefined' != typeof Prism) {
     var e = /^diff-([\w-]+)/i,

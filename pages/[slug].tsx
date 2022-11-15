@@ -13,7 +13,7 @@ type PageProps = MarkdownDocument & {
   workshops: string[];
 };
 
-export default ({ content, meta, contents, workshop }: PageProps) => {
+export default ({ content, slug }: PageProps) => {
   useEffect(() => {
     window.Prism.highlightAll();
   }, [content]);
@@ -21,10 +21,10 @@ export default ({ content, meta, contents, workshop }: PageProps) => {
   return (
     <ContentLayout>
       <Head>
-        <title>{meta.title} — React && TypeScript — Frontend Masters</title>
+        <title>{slug} — React && TypeScript — Frontend Masters</title>
       </Head>
       <header>
-        <h1>{meta.title}</h1>
+        <h1>{slug}</h1>
       </header>
       <Markdown>{content}</Markdown>
     </ContentLayout>
