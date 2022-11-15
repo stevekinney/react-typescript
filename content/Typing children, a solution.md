@@ -1,3 +1,8 @@
+---
+repository: "https://github.com/stevekinney/typing-children"
+branch: solution
+---
+
 How do we type [this](Typing%20children,%20an%20exercise.md)? Well. We have a few choices.
 
 * `JSX.Element;`: 💩 This doesn't account for arrays (e.g. multiple elements) at all.

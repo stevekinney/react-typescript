@@ -1,3 +1,9 @@
+---
+repository: "https://github.com/stevekinney/colors"
+branch: typing-actions-exercise
+endBranch: typing-actions-solution
+---
+
 Alright, let's get one of those `ColorChangeSwatches` wired up to our state management. We've already got the action in place from earlier, so that's nice.
 
 Let's go for those saved colors that don't really save. (They're hard-coded.)

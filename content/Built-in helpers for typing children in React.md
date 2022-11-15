@@ -17,7 +17,7 @@ const Button = ({ children, onClick }: ButtonProps) => {
 };
 ````
 
-You also have `React.ComponentPropsWithoutRef`, which you could use as follows:
+You also have `React.ComponentPropsWithoutRef`, which you could—and we will—use as follows:
 
 ````tsx
 type ButtonProps = React.ComponentPropsWithoutRef<'button'>;
@@ -33,47 +33,13 @@ const Button = ({ children, onClick, type }: ButtonProps) => {
 
 Now, `Button` has all of the some props as the native `<button>` element from the DOM.
 
-(**Note**: This no longer works in React 18.)
-
-You can also use a [`FunctionalComponent<Props>`](https://www.newline.co/@bespoyasov/how-to-define-props-with-children-in-react-typescript-app--56bd18be#using-functioncomponent-or-fc) to accomplish a similar goal:
+🚨 **Important note**: Prior to React 18, you coulkd also use a [`FunctionalComponent<Props>`](https://www.newline.co/@bespoyasov/how-to-define-props-with-children-in-react-typescript-app--56bd18be#using-functioncomponent-or-fc) or `Component<Props>` to accomplish a similar goal:
 
 ````tsx
-type ComponentProps = {
-  foo: string;
-};
+import * as React from 'react';
 
-const Component: React.FunctionComponent<ComponentProps> = ({ foo }) => (
-  <span>{foo}</span>
-);
+// 🚨 No good anymore.
+const Input: React.FC = ({ children }) => <div>{children}</div>;
 ````
 
-You can also extend a built-in HTML element, which supports children:
-
-````tsx
-export interface Props extends React.HTMLProps<HTMLDivElement> {
-  heading: string;
-}
-````
-
-Now, you can do something like this:
-
-````tsx
-import React, { HTMLAttributes, PropsWithChildren } from 'react';
-
-interface ComponentProps extends HTMLAttributes<HTMLDivElement> {
-  name: string;
-}
-
-const Component: React.FC<PropsWithChildren<ComponentProps>> = ({
-  name,
-  children,
-  ...rest
-}) => {
-  return (
-    <div>
-      <div {...rest}>{`Hello, ${name}!`}</div>
-      {children}
-    </div>
-  );
-};
-````
+But, this was removed when [the types were refactored for React 18](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210). You can read more about the rationale [here](https://solverfox.dev/writing/no-implicit-children/).

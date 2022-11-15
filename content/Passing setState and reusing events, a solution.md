@@ -1,3 +1,8 @@
+---
+repository: "https://github.com/stevekinney/inspirational-quotes"
+branch: with-filtering-solution
+---
+
 First off, I desperately want to get rid of that `any` for `setFilters` in `<QuoteFilter />`. If I have taught you anything so far, it's that hovering stuff is a useful technique.
 
 If we hover over `setFilters`, we'll see the following:
@@ -138,9 +143,7 @@ const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
 };
 ````
 
- > 
- > \[!NOTE\] An alterative, but less good, approach
- > This will *also* work, but I like the above approach more because it fits in nicely with how we typed props earlier. I like not having to do things in different ways if I can avoid it.
+**An alterative, but less good, approach**: This will *also* work, but I like the above approach more because it fits in nicely with how we typed props earlier. I like not having to do things in different ways if I can avoid it.
 
 ````ts
 const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -150,3 +153,5 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
   }));
 };
 ````
+
+Let's talk about another intering benefit we get from [unions](TypeScript's%20unions%20in%20React.md).

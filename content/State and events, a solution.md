@@ -1,3 +1,9 @@
+---
+repository: "https://github.com/stevekinney/inspirational-quotes"
+branch: exercise
+endBranch: solution
+---
+
 Let's start by getting rid of the hard-coded data and replacing it with some state.
 
 ````ts
@@ -9,6 +15,32 @@ You'll see have a bit of an issue here. Using an empty array should work in Java
 ````ts
 const quotes: never[];
 ````
+
+## A similar problem with arrays
+
+The code won't compile and we'll get the following error:
+
+ > 
+ > Property 'content' does not exist on type 'never'.
+
+This kind of makes sense if we follow along with the rational that we've been establishing, right? Consider theses lines:
+
+````ts
+const [quote, setQuote] = useState();
+const [quotes, useQuotes] = useState([]);
+````
+
+With the array, it has no idea what it could possibly contain. It just assumes that it'll be a forever empty array.
+
+Then we move on to this line:
+
+````ts
+if (!quote) return <Loading />;
+````
+
+Okay, quote is falsy, which `undefined` *is*, then show the `<Loading />` component. Well, if `quote` is undefined and we handled the case where `quote` is `undefined`, then as we move along in the code, `quote` can't be `undefined` anymore and we're out of options. So, TypeScript assigns it a special type: `never`.
+
+`never` is the lowest common demoninator and *certainly* doesn't have a property like `content` or `source` on in—mostly, because it doesn't have *anything*.
 
 Luckily, we know how to handle this.
 
@@ -29,16 +61,6 @@ Now that we have a value that represents the number of quotes that we want to lo
 
 ````tsx
 <Quotes count={count}>/* … */</Quotes>
-````
-
-And, we can load the requisite number of quotes.
-
-````ts
-useEffect(() => {
-  fetch(`/api/quotes?limit=${count}`)
-    .then((res) => res.json())
-    .then(({ quotes }) => setQuotes(quotes));
-}, []);
 ````
 
 ## Changing the count
@@ -77,11 +99,9 @@ We also need to add the `onSubmit` event handler before it will compile, but tha
 Hmm, we clearly need to break out the ability to fetch posts out of the `useEvent` hook.
 
 ````ts
-const fetchPosts = (count: number) => {
-  fetch(`/api/quotes?limit=${count}`)
-    .then((res) => res.json())
-    .then(({ quotes }) => setQuotes(quotes));
-};
+useEffect(() => {
+  fetchQuotes(count).then(setQuotes);
+}, [count]);
 ````
 
 We might feel fancy and try to do something like this to get that initial count.

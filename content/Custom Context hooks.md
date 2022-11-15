@@ -1,3 +1,9 @@
+---
+repository: "https://github.com/stevekinney/colors"
+branch: context-api
+endBranch: context-hooks
+---
+
 ## Creating a `useDispatch` Hook
 
 For starters, we can avoid needed to bring in both the `ColorContext` and `useContext` hook by creating a `useDispatch` hook that brings them both together in an easily digestible format.

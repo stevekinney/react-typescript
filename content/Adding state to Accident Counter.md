@@ -1,3 +1,8 @@
+---
+repository: "https://github.com/stevekinney/accident-counter"
+branch: main
+---
+
 Let's quickly add some state to a simple little counter. For starters, this is basically the entire implementation.
 
 ````tsx

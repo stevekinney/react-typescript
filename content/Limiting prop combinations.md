@@ -56,9 +56,3 @@ type DestructiveButtonProps = {
 ````
 
 You can find a completed version [here](https://codesandbox.io/s/buttons-complete-732fx).
-
-## Where Are We Now?
-
-* `examples/36-buttons-with-limited-props`
-* `projects/buttons-base` on the `buttons-with-limited-props` branch
-* [CodeSandbox](https://codesandbox.io/s/buttons-complete-732fx)

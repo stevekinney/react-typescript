@@ -1,3 +1,11 @@
+---
+repository: "https://github.com/stevekinney/accident-counter"
+branch: use-reducer
+endBranch: use-reducer-refactored
+---
+
+Let's head back over to our [Accident Counter and check out the `use-reducer-base` branch](https://github.com/stevekinney/accident-counter/tree/use-reducer).
+
 We've see how to use TypeScript with `useState`, but what about `useReducer`? It shouldn't be surprisng to find that a *lot* of it works out of the box, that said, there are still some additional features that we can take advantage of the make our lives easier.
 
 ## Refactoring from `useState` to `useReducer`
@@ -25,6 +33,8 @@ There are a bunch of ways this could go wrong. What happens if we don't pass our
 
 ![](_attachments/Pasted%20image%2020221107091146.png)
 ![](_attachments/Pasted%20image%2020221107091217.png)
+
+Okay, enough of that. Let's write a real reducer.
 
 ## Managing the current and draft count with the same reducer
 

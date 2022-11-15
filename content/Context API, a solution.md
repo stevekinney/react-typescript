@@ -1,3 +1,9 @@
+---
+repository: "https://github.com/stevekinney/packing-list"
+branch: with-typescript
+endBranch: typescript-context-api-implementation
+---
+
 Alright, you can see I did a little bit of the basic set up for you as this is a course on TypeScript and not the Context API itself and you just watched me set up the Context API in a previous example. You're more than welcome to delete `src/context.tsx`, if you'd like.
 
 Let's port over our state management from `src/components/application.tsx`:

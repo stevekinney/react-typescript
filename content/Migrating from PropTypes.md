@@ -1,35 +1,45 @@
+---
+repository: "https://github.com/stevekinney/name-badges"
+branch: main
+endBranch: basic-implmentation
+---
+
 It turns out that in React, sometimes we pass props to our components instead of just using them as a fancy way to break up static HTML. Having my name hardcoded into the markup is cool, I guess, but it would be *even better* if we could pass a prop in there.
 
 Maybe, we do something like this:
 
 ````tsx
+import NameBadge from './name-badge';
+
 const Application = () => (
-  <main className="flex flex-col items-center h-full gap-8 place-content-center bg-slate-600">
-    <NameBadge name="Wes" />
+  <main className="application">
+    <NameBadge name={'Brendan Kelly'} />
   </main>
 );
+
+export default Application;
 ````
 
 Now, if you tried that, you'll see that TypeScript is already very annoyed with you.
 
 ![](_attachments/invalid-props-for-name-badge.png)
 
-Okay, that's somewhat cryptic. But, we get the gist. If this was JavaScript, we could pass whatever gargage we wanted to a component, but TypeScript is telling us, "Hey look, you told us that this function doesn't take any arguments and now we're passing it props? What gives?
+Okay, that's somewhat cryptic. But, we get the gist. If this was JavaScript, we could pass whatever garbage we wanted to a component. But TypeScript is telling us, "Hey look, you told us that this function doesn't take any arguments and now we're passing it props? What gives?
 
 Let's do the obvious thing and update our component to take some props.
 
 ````tsx
-const NameBadge = ({ name }) => {
+const NameBadge = ({ name }: { name: string }) => {
   return (
-    <section className="flex h-96 w-[600px] flex-col rounded-xl border-2 border-slate-900 bg-red-700 shadow-lg">
-      <header className="py-3 font-black text-center text-white uppercase rounded-t-xl">
+    <section className="badge">
+      <header className="badge-header">
         <h1 className="text-5xl">HELLO</h1>
         <p>My name is…</p>
       </header>
-      <div className="flex items-center flex-grow bg-white place-content-center">
-        <p className="font-serif text-6xl">{name}</p>
+      <div className="badge-body">
+        <p className="badge-name">{name}</p>
       </div>
-      <footer className="bg-red-700 h-11 rounded-b-xl" />
+      <footer className="badge-footer" />
     </section>
   );
 };
@@ -54,6 +64,8 @@ NameBadge.propTypes = {
 In JavaScript, we've traditionally used `PropTypes` in order to make sure that we were passing the correct types to our React components. `PropTypes` would only run at run-time and in development and would spit out console warnings in the event that the component recieved the wrong types. This was good, but we can do better with TypeScript—specifically, we can do this statically and at compile time.
 
 This means, that our application won't build if we it looks like we're going to have a problem.
+
+Basically, you might have already been doing a lot of the work with a lot less of the gain. Don't tell me I passed you the wrong types at in my browser console. Tell me in my editor while I am editing.
 
 ## Specifing what types you props out to be
 
@@ -87,6 +99,8 @@ And now it's happy with us.
 
 As you can imagine, this could get a little out of control if we had lots of props. So, we can also create a new prop and tell TypeScript that our component is expecting to a lot of props. Let's see what that would look like.
 
+This the idiomatic pattern that you can expect to see regularly:
+
 ````ts
 type NameBadgeProps = {
   name: string;
@@ -100,5 +114,7 @@ export default NameBadge;
 ````
 
 It's convention to just take the name of your components and tack on -`Props` on to the end. You don't have to be overly creative.
+
+This isn't particularly compelling code, but if you want, you can check it out on the `basic-implementation` branch.
 
 And with that, it's time to move on to [Refactoring from PropTypes, an exercise](Refactoring%20from%20PropTypes,%20an%20exercise.md).

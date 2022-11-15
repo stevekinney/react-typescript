@@ -1,3 +1,5 @@
+**Let's be very clear about the goal here**: All I want to do is put in your mind that these tools exist so that you know to go looking for them when you need them. I want to keep us focused on solving problems in our collection of little React applications. So, don't feel pressured to grok them all at first glance, just make a mental note..
+
 ## `keyof`
 
 ````ts

@@ -1,19 +1,26 @@
+---
+repository: "https://github.com/stevekinney/name-badges"
+branch: main
+---
+
 **Alternative title**: Using TypeScript with Intellisense.
+
+We're going to start off in [this repository](https://github.com/stevekinney/name-badges) for the time being.
 
 Alright, let's start simple here and play a fun game: Is the component below written in JavaScript or TypeScript?
 
 ````tsx
 const NameBadge = () => {
   return (
-    <section className="flex h-96 w-[600px] flex-col rounded-xl border-2 border-slate-900 bg-red-700 shadow-lg">
-      <header className="py-3 font-black text-center text-white uppercase rounded-t-xl">
+    <section className="badge">
+      <header className="badge-header">
         <h1 className="text-5xl">HELLO</h1>
         <p>My name is…</p>
       </header>
-      <div className="flex items-center flex-grow bg-white place-content-center">
-        <p className="font-serif text-6xl">Steve</p>
+      <div className="badge-body">
+        <p className="badge-name">Steve</p>
       </div>
-      <footer className="bg-red-700 h-11 rounded-b-xl" />
+      <footer className="badge-footer" />
     </section>
   );
 };
@@ -55,10 +62,10 @@ If we add some chaos to the equation, you'll see that TypeScript respects the co
    return (
 ````
 
-Now, TypeScript tells us that this function will give us either a `JSX.Element` *or* it's going to give up `null` depending on which way the winds blow.
+Now, TypeScript tells us that this function will give us either a `JSX.Element` *or* it's going to give us `null` depending on which way the winds blow.
 
 ````ts
 const NameBadge: () => JSX.Element | null;
 ````
 
-Alright. Enough of that. Let's learn how to [migrate from PropTypes](Migrating%20from%20PropTypes.md).
+Alright. Enough of that. I think I made my point. Let's learn how to [migrate from PropTypes](Migrating%20from%20PropTypes.md).

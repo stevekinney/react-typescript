@@ -1,4 +1,9 @@
-Alright, it's that time again. I added some filters, but there are some new complexities that you need to deal with.
+---
+repository: "https://github.com/stevekinney/inspirational-quotes"
+branch: with-filtering
+---
+
+Alright, it's that time again. I added some filters, but there are some new complexities that you need to deal with. Let's take a look at the `with-filtering` branch.
 
 ````ts
 type QuoteFilterProps = {

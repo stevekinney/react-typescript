@@ -1,3 +1,9 @@
+---
+repository: "https://github.com/stevekinney/colors"
+branch: context-api
+endBranch: create-context
+---
+
 Now that we know a little bit more about generics, we can make an abstraction for solving for what to do if our context value isn't set yet.
 
 If using `as` isn't to your liking, you can take advantage of generics and closures.
@@ -145,3 +151,7 @@ export const useHexColor = () => {
 ````
 
 Everything should now work as expected.
+
+## Your Mission
+
+I'll leave it as an exercise to the reader (or, viewer), but could you get this working in the packing list application?

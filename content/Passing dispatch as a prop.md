@@ -1,3 +1,9 @@
+---
+repository: "https://github.com/stevekinney/colors"
+branch: main
+endRepository: typing-actions-exercise
+---
+
 Alright, let's start with a new application that allows us to [pick and save colors](https://github.com/stevekinney/colors). I'll start us off and then you'll take it from there for a bit.
 
 Right now there is a fair bit of prop drilling and not all of the functionality works just yet. You can select a new color from the color input, but you can't adjust it from anywhere else.

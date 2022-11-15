@@ -1,7 +1,14 @@
+---
+repository: "https://github.com/stevekinney/name-badges"
+branch: basic-implementation
+endBranch: exercise-solution
+sandbox: "https://codesandbox.io/s/h1nrp5"
+---
+
 You can switch the file type in your editor or you from the command line. Whatever makes you happy.
 
 ````sh
-git mv src/components/control-panel.jsx src/components/control-panel.tsx
+git mv src/components/controls.jsx src/components/controls.tsx
 ````
 
 And now, TypeScript is angry with us. Luckily, we've seen this error before, so we shouldn't be too surprised.
@@ -39,9 +46,7 @@ Let's break down that's happening:
   * The `| undefined` means that it *could* be `undefined`, which meanes sense since it's optional.
 * This means, that the type is `React.ChangeEventHandler<HTMLInputElement>`.
 
- > 
- > \[!NOTE\] What are some of the other event handlers?
- > If you're curious what other event handles React includes, you can see a list of them in [here](React's%20built-in%20event%20handlers.md).
+If you're curious what other event handles React includes, you can see a list of them in [here](React's%20built-in%20event%20handlers.md).
 
 ````tsx
 type ControlPanelProps = {
@@ -79,15 +84,15 @@ type NameBadgeProps = {
 
 const NameBadge = ({ name, greeting }: NameBadgeProps) => {
   return (
-    <section className="flex h-96 w-[600px] flex-col rounded-xl border-2 border-slate-900 bg-red-700 shadow-lg">
-      <header className="py-3 font-black text-center text-white uppercase rounded-t-xl">
+    <section className="badge">
+      <header className="badge-header">
         <h1 className="text-5xl">{greeting}</h1>
         <p>My name is…</p>
       </header>
-      <div className="flex items-center flex-grow bg-white place-content-center">
-        <p className="font-serif text-6xl">{name}</p>
+      <div className="badge-body">
+        <p className="badge-name">{name}</p>
       </div>
-      <footer className="bg-red-700 h-11 rounded-b-xl" />
+      <footer className="badge-footer" />
     </section>
   );
 };
@@ -101,8 +106,8 @@ And we can update `Application` accordingly:
 import NameBadge from './name-badge';
 
 const Application = () => (
-  <main className="flex flex-col items-center h-full gap-8 place-content-center bg-slate-600">
-    <NameBadge name="Wes" greeting="Salutations" />
+  <main className="application">
+    <NameBadge name={'Brendan Kelly'} greeting="Salutations" />
   </main>
 );
 
@@ -114,7 +119,7 @@ export default Application;
 It would be cool if it would default to "hello" and then could omit `greeting` if we didn't want to customize it. We can assign it a sensible default.
 
 ````tsx
-const NameBadge = ({ name, greeting = 'Hello' }: NameBadgeProps) => {
+const NameBadge = ({ name, greeting = 'Yo' }: NameBadgeProps) => {
   // …
 };
 ````
@@ -132,8 +137,6 @@ type NameBadgeProps = {
 };
 ````
 
-And now everything should compile as expected.
+And now everything should compile as expected. You can check my work on the `exercise-solution` branch.
 
-## Moving along
-
-Let's look at [some of the other props that you might come across in your day to day life](Commonly-used%20props.md).
+For reference, I've written up [some of the other props that you might come across in your day to day life](Commonly-used%20props.md), but we're going to be moving along and get into more React-specific stuff like what are we going do about [child components](Typing%20children,%20an%20exercise.md)?

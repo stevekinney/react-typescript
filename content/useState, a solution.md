@@ -1,3 +1,9 @@
+---
+repository: "https://github.com/stevekinney/accident-counter"
+branch: main
+endBranch: form-solution
+---
+
 Let's [add some functionality to that counter](useState,%20an%20exercise.md).
 
 We'll start by creating some state to hold on to the value in the input field. I'm going to base it on whatever the current count was when the component was first rendered, but you don't have to.
@@ -9,6 +15,8 @@ const [draftCount, setDraftCount] = useState(count);
 I can *try* to add that as a change handler to the `<input />`, but I already alluded to the fact that this isn't going to go particularly well.
 
 ![](_attachments/Pasted%20image%2020221107064059.png)
+
+My annoyance with this behavior of the DOM may or may not become a recurring theme today.
 
 This is similar to what we saw before. The message reads:
 
@@ -128,4 +136,4 @@ We didn't run into that problem with `setDraftCount` because `setDraftCount` ret
 
 ### A quick disclaimer
 
-React experts will know that using `useEffect` isn't great here because it could trigger a second render. One alternative is to just wrap `setCount` to do both at the same time. This is probably the best example, but I'm most just trying to drum up fictitious reasons to use hooks.
+React experts will know that using `useEffect` isn't great here because it could trigger a second render. One alternative is to just wrap `setCount` to do both at the same time. This is probably the best example, but I'm most just trying to drum up fictitious reasons to show you the `useEffect` hook with TypeScript and it seemed more efficient to do it here than to set us up in a brand new example.

@@ -1,3 +1,8 @@
+---
+repository: "https://github.com/stevekinney/colors"
+branch: typing-actions-exercise
+---
+
 Okay, now it's your turn. It'll be a bit of a Choose Your Own Adventure™, because there are plenty of places to do the same thing.
 
 * Add a action and the associated reducer logic for one of the other adjustments.
