@@ -4,7 +4,7 @@ branch: basic-implementation
 sandbox: "https://codesandbox.io/s/h1nrp5"
 ---
 
-Alright, let's get the blood flowing a bit and take a look at this component hiding out in `src/components/control-panel.jsx`:
+Alright, let's get the blood flowing a bit and take a look at this component hiding out in `src/components/controls.jsx`:
 
 ````tsx
 import PropTypes from 'prop-types';
