@@ -3,7 +3,7 @@ repository: "https://github.com/stevekinney/inspirational-quotes"
 branch: exercise
 ---
 
-Consider this [application](https://github.com/stevekinney/inspirational-quotes/tree/with-filtering) and it's `with-filtering` branch.
+Consider this [application](https://github.com/stevekinney/inspirational-quotes/tree/exercise) and it's `exercise` branch.
 
 * Replace the hard-coded state with data from the API and include the correct type for the array of quotes.
   * The form for changing the count and submitting the form is in the `<Quotes>` component.
