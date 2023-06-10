@@ -4,7 +4,7 @@ branch: mirroring-solution
 endBranch: polymorphic
 ---
 
-Let's walk along the razors edge between practicalk and academic. I'm including this section because once or twice, I've needed to use the techiques we're about to cover, but those occasions were few and far between.
+Let's walk along the razors edge between practical and academic. I'm including this section because once or twice, I've needed to use the techniques we're about to cover, but those occasions were few and far between.
 
 When I worked at Twilio, they had a team dedicated to building out their design system, [Paste](https://paste.twilio.design). The foundational component was [`Box`](https://paste.twilio.design/primitives/box). Everything was build on top of `Box`.
 
