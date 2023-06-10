@@ -22,7 +22,7 @@ Next up, we're going to use React's regular `createContext` function. Just like 
 
 ````tsx
 export const createContext = <T extends {}>() => {
-  const Context = React.createContext<A | undefined>(undefined);
+  const Context = React.createContext<T | undefined>(undefined);
 };
 ````
 
@@ -57,9 +57,9 @@ export const createContext = <T extends {}>() => {
 
 What's happening?
 
-* We know that the value of the context can either be `T` ot `undefined`.
+* We know that the value of the context can either be `T` or `undefined`.
 * So, pull the value out of `React.useContext`, and take a look at it.
-* Blow up if `ctx`, this means that we won't return anything in the case that `ctx` is \`undefined.
+* Blow up if `ctx` is not defined. This means that we won't return anything in the case that `ctx` is `undefined`.
 * Well, if `ctx` can only either be `undefined` or `T` and it's not `undefined`, then it's `T`. Boom. No more guessing games.
 
 ### Getting our new functions
